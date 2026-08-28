@@ -1,6 +1,6 @@
 // Called automatically whenever a journal entry is saved. Sends the entry
-// plus a list of candidate goals/other entries to Claude and asks which are
-// genuinely related — the Obsidian-style "web" is these AI-found links.
+// plus a list of candidate goals/other entries to the model and asks which
+// are genuinely related — the Obsidian-style "web" is these AI-found links.
 export const config = { maxDuration: 30 };
 
 const SUGGEST_LINKS_TOOL = {
