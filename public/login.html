@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GetBetter</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #faf8f5;
+        font-family: 'Inter', -apple-system, sans-serif;
+        color: #2b2621;
+      }
+      .card {
+        width: 100%;
+        max-width: 340px;
+        padding: 32px;
+      }
+      h1 {
+        font-family: 'Fraunces', Georgia, serif;
+        font-weight: 600;
+        font-size: 26px;
+        margin: 0 0 6px;
+      }
+      p {
+        color: #6b6258;
+        font-size: 13px;
+        margin: 0 0 24px;
+      }
+      input {
+        width: 100%;
+        background: #fff;
+        border: 1px solid #e6e1d7;
+        border-radius: 8px;
+        padding: 11px 14px;
+        font-size: 14px;
+        color: #2b2621;
+        outline: none;
+        margin-bottom: 12px;
+      }
+      input:focus {
+        border-color: #bd5b28;
+      }
+      button {
+        width: 100%;
+        background: #bd5b28;
+        border: none;
+        border-radius: 8px;
+        color: #fffaf3;
+        padding: 11px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+      .error {
+        color: #c1503d;
+        font-size: 12.5px;
+        margin-top: 10px;
+        min-height: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>GetBetter</h1>
+      <p>Enter your passphrase to continue.</p>
+      <form id="form">
+        <input type="password" id="password" placeholder="Passphrase" autofocus autocomplete="current-password" />
+        <button type="submit" id="submit">Enter</button>
+        <div class="error" id="error"></div>
+      </form>
+    </div>
+    <script>
+      const form = document.getElementById('form');
+      const errorEl = document.getElementById('error');
+      const submitBtn = document.getElementById('submit');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const password = document.getElementById('password').value;
+        errorEl.textContent = '';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Checking...';
+        try {
+          const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ password }),
+          });
+          if (res.ok) {
+            window.location.href = '/';
+          } else {
+            errorEl.textContent = 'Wrong passphrase.';
+          }
+        } catch {
+          errorEl.textContent = 'Something went wrong. Try again.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enter';
+        }
+      });
+    </script>
+  </body>
+</html>
