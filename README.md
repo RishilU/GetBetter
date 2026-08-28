@@ -1,9 +1,9 @@
 # GetBetter
 
 A personal growth tracker I built for myself — part habit tracker, part journal, part
-coach. It's organized around five areas of life (Mind, Presence, Social, Communication,
-Body), each broken into concrete goals with their own roadmap and daily habits, plus a
-journal that quietly figures out how everything connects.
+coach. It's organized around different aspects (Mind, Presence, Social, Communication,
+Body), and users can add more per their customization,each broken into concrete goals with
+their own roadmap and daily habits, plus a journal that figures out how everything connects.
 
 I wanted something more honest than the usual streak-counter apps: a tool that actually
 looks at what I'm doing and tells me something true about it, instead of just cheering
